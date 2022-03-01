@@ -1,5 +1,6 @@
 import 'package:bloc_training/model/catpage.dart';
 import 'package:bloc_training/model/datum.dart';
+import 'package:bloc_training/page2.dart';
 import 'package:bloc_training/repository/fetchData.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +46,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Page2()));
+          },
+          child: Icon(Icons.navigate_next),
+        ),
         appBar: AppBar(
           title: Text(widget.title),
         ),
@@ -101,3 +108,6 @@ class _MyHomePageState extends State<MyHomePage> {
             }));
   }
 }
+
+
+

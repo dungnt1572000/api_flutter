@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:bloc_training/model/link.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'datum.dart';
 import 'datum.dart';
 part 'catpage.g.dart';
 @JsonSerializable()
