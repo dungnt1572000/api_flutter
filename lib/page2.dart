@@ -20,38 +20,40 @@ class _Page2State extends State<Page2> {
   TextEditingController email = TextEditingController();
   bool isactive = true;
   Sex sex = Sex.male;
+  late var userRespone;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
+        onPressed: ()  {
           var userCreate = UserCreate(username.text, email.text, sex.name,
               isactive ? 'active' : 'inactive');
-          print('alo' + userCreate.toString());
+          // print('alo' + userCreate.toString());
           // print(userCreate.gender);
           // var userRespone = await APIService().createUser(userCreate);
 
-          var userRespone =
-              await ApiUser(Dio(BaseOptions(contentType: 'application/json')))
+          userRespone =
+               ApiUser(Dio(BaseOptions(contentType: 'application/json')))
                   .posttoSV(authen, userCreate.toJson())
                   .then((value) {
-            print("deobietduoc"+value.toString());
-          }).catchError((Object obj) {
-            switch (obj.runtimeType) {
-              case DioError:
-                final res = (obj as DioError).response;
-                print("Got error : " +
-                    res!.statusCode.toString() +
-                    '->' +
-                    res.statusMessage!);
-                break;
-              default:
-                break;
-            }
-          });
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => Page3(userRespone)));
+              print(value.toString());
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => Page3(value)));
+          })
+          //          .catchError((Object obj) {
+          //   switch (obj.runtimeType) {
+          //     case DioError:
+          //       final res = (obj as DioError).response;
+          //       print("Got error : ${res?.statusCode??'Loi gi'}");
+          //       break;
+          //     default:
+          //       break;
+          //   }
+          // }
+          // )
+          ;
+
         },
         child: Text('Regist'),
       ),
@@ -104,6 +106,11 @@ class _Page2State extends State<Page2> {
                   });
                 }),
           ),
+          // FutureBuilder<UserRespone>(
+          //     future: userRespone,
+          //     builder: (context, snapshot) {
+          //   return Text();
+          // })
         ],
       )),
     );

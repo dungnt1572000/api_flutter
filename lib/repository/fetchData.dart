@@ -30,16 +30,16 @@ abstract class ApiClient {
   Future<CatPage> getCatPage(@Query('page') int page);
 }
 
-@RestApi(baseUrl: 'https://gorest.co.in')
+@RestApi(baseUrl: 'https://gorest.co.in/')
 abstract class ApiUser {
   factory ApiUser(Dio dio) {
     return _ApiUser(dio);
   }
 
-  @GET('/public/v2/users/{id}')
+  @GET('public/v2/users/{id}')
   Future<UserRespone> getInForUser(@Header('Authorization') String author,@Path('id') int id);
 
-  @POST('/public/v2/users/')
+  @POST('public/v2/users/')
   Future<UserRespone> posttoSV(
       @Header('Authorization') String author, @Body() Map<String,dynamic> body);
 }
