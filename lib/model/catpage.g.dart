@@ -27,17 +27,17 @@ CatPage _$CatPageFromJson(Map<String, dynamic> json) => CatPage(
     );
 
 Map<String, dynamic> _$CatPageToJson(CatPage instance) => <String, dynamic>{
-      'currentPage': instance.currentPage,
-      'datum': instance.datum,
-      'firstPageUrl': instance.firstPageUrl,
+      'current_page': instance.currentPage,
+      'data': instance.datum,
+      'first_page_url': instance.firstPageUrl,
       'from': instance.from,
-      'lastPage': instance.lastPage,
-      'lastPageUrl': instance.lastPageUrl,
+      'last_page': instance.lastPage,
+      'last_page_url': instance.lastPageUrl,
       'links': instance.links,
-      'nextPageUrl': instance.nextPageUrl,
+      'next_page_url': instance.nextPageUrl,
       'path': instance.path,
-      'perPage': instance.perPage,
-      'prevPageUrl': instance.prevPageUrl,
+      'per_page': instance.perPage,
+      'prev_page_url': instance.prevPageUrl,
       'to': instance.to,
       'total': instance.total,
     };

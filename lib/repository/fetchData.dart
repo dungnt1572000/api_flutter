@@ -1,15 +1,48 @@
 import 'dart:convert';
+import 'dart:core';
 import 'dart:io';
+
+import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
+import 'package:retrofit/http.dart';
 
 import 'package:bloc_training/model/page2/user_create.dart';
 import 'package:bloc_training/model/page2/user_respone.dart';
-import 'package:http/http.dart' as http;
 
 import '../model/catpage.dart';
+
+part 'fetchData.g.dart';
 
 const String breeds_url = 'https://catfact.ninja/breeds/';
 const String authen =
     'Bearer 37e4a8f0b1253156b05ce5cd9490f70eb0d0f2e9eb388a2a74041078947bf8c6';
+
+@RestApi(baseUrl: 'https://catfact.ninja/')
+abstract class ApiClient {
+  factory ApiClient(Dio dio) {
+    dio.options = BaseOptions(
+        connectTimeout: 30000,
+        receiveTimeout: 30000,
+        contentType: 'application/json');
+    return _ApiClient(dio);
+  }
+  @GET('breeds/')
+  Future<CatPage> getCatPage(@Query('page') int page);
+}
+
+@RestApi(baseUrl: 'https://gorest.co.in')
+abstract class ApiUser {
+  factory ApiUser(Dio dio) {
+    return _ApiUser(dio);
+  }
+
+  @GET('/public/v2/users/{id}')
+  Future<UserRespone> getInForUser(@Header('Authorization') String author,@Path('id') int id);
+
+  @POST('/public/v2/users/')
+  Future<UserRespone> posttoSV(
+      @Header('Authorization') String author, @Body() Map<String,dynamic> body);
+}
 
 class APIService {
   Future<CatPage> fetchCatPage(String url) async {
